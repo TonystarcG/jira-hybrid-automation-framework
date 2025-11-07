@@ -1,0 +1,55 @@
+Unified Automation Framework Setup Instructions
+===============================================
+
+1. Create and Activate Virtual Environment
+------------------------------------------
+python -m venv venv
+
+# On macOS/Linux
+source venv/bin/activate
+
+# On Windows
+venv\Scripts\activate
+
+
+2. Install Required Python Packages
+-----------------------------------
+pip install robotframework
+pip install robotframework-requests
+pip install robotframework-jsonlibrary
+pip install robotframework-datadriver
+pip install robotframework-pabot
+pip install playwright
+pip install pytest
+pip install pytest-playwright
+pip install python-dotenv
+
+
+3. Install Playwright Browsers
+------------------------------
+playwright install
+
+
+4. Optional: Install Robot Framework Plugin for PyCharm
+--------------------------------------------------------
+Install "Robot Framework Support" from JetBrains Marketplace.
+
+
+5. Verify Installation
+----------------------
+robot --version
+pabot --version
+pytest --version
+playwright --version
+
+
+6. Run Tests
+------------
+# Run Robot Tests (Single Thread)
+robot tests/
+
+# Run Robot Tests (Parallel with Pabot)
+pabot --outputdir results tests/
+
+# Run Playwright Tests (UI)
+pytest tests/ui/test_ui_create.robot

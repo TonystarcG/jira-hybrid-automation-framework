@@ -1,0 +1,42 @@
+{
+  "valid_issues": [
+    {
+      "summary": "Valid API issue - Task",
+      "project_key": "DEMO",
+      "issue_type": "Task"
+    },
+    {
+      "summary": "Valid API issue - Bug",
+      "project_key": "DEMO",
+      "issue_type": "Bug"
+    }
+  ],
+  "invalid_issues": [
+    {
+      "summary": "",
+      "project_key": "DEMO",
+      "issue_type": "Task",
+      "description": "Missing summary"
+    },
+    {
+      "summary": "Invalid issue type",
+      "project_key": "DEMO",
+      "issue_type": "InvalidType",
+      "description": "Unsupported issue type"
+    },
+    {
+      "summary": "Missing project key",
+      "project_key": "",
+      "issue_type": "Task",
+      "description": "Project key is empty"
+    }
+  ],
+  "update_payloads": [
+    {
+      "new_summary": "Updated summary via API"
+    },
+    {
+      "new_summary": "Another update for validation"
+    }
+  ]
+}

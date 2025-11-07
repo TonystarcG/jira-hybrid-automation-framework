@@ -1,0 +1,54 @@
+{"level":30,"time":"2025-09-22T15:37:29.241Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Listening on 127.0.0.1:61683"}
+(node:24052) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-09-22T15:37:29.664Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-09-22T15:37:30.405Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Adding browser to stack: chromium, version: 140.0.7339.16"}
+{"level":30,"time":"2025-09-22T15:37:30.406Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-09-22T15:37:30.406Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-09-22T15:37:30.418Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-09-22T15:37:30.418Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@b2f96322c0408147c25b92cac5e800ec\"},\"headless\":false,\"_contextStack\":[],\"id\":\"browser=90e333da-2657-4296-83a7-bf6f1bb91e80\"}"}
+{"level":30,"time":"2025-09-22T15:37:30.434Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Setting default timeout for context context=685c7d24-c584-4a65-a872-93b48b9ac692 to 10000"}
+{"level":30,"time":"2025-09-22T15:37:30.434Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Changed active context: context=685c7d24-c584-4a65-a872-93b48b9ac692"}
+{"level":30,"time":"2025-09-22T15:37:30.806Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Video path: undefined"}
+{"level":30,"time":"2025-09-22T15:37:30.806Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Changed active page"}
+{"level":30,"time":"2025-09-22T15:37:40.828Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Error of node method  newPage"}
+================= Original suppressed error =================
+page.goto: Timeout 10000ms exceeded.
+Call log:
+[2m  - navigating to "https://www.google.com/", waiting until "load"[22m
+
+    at newPage (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\index.js:12572:18)
+    at async PlaywrightServer.newPage (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\index.js:13137:28) {
+  name: 'TimeoutError'
+}
+=============================================================
+{"level":30,"time":"2025-09-22T15:37:40.836Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method takeScreenshot"}
+================= Original suppressed error =================
+Error: Tried to take screenshot, but no page was open.
+    at exists (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\index.js:10725:11)
+    at takeScreenshot (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\index.js:10769:3)
+    at PlaywrightServer.takeScreenshot (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\index.js:13137:34)
+    at Object.onReceiveHalfClose (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework\venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-09-22T15:37:40.837Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Error of node method  takeScreenshot"}
+{"level":30,"time":"2025-09-22T15:37:40.852Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.853Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.856Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.856Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.860Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.861Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.866Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.866Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.869Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Changed active context: context=685c7d24-c584-4a65-a872-93b48b9ac692"}
+{"level":30,"time":"2025-09-22T15:37:40.870Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method closeContext"}
+{"level":30,"time":"2025-09-22T15:37:40.879Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method closeContext"}
+{"level":30,"time":"2025-09-22T15:37:40.888Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.888Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-09-22T15:37:40.925Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2025-09-22T15:37:41.186Z","pid":24052,"hostname":"SAS-DBN18G3","msg":"End of node method closeAllBrowsers"}

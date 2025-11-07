@@ -1,0 +1,22 @@
+{
+    "base_url": "https://hritwick05sas.atlassian.net",
+    "selectors": {
+        "create_button": "button[data-testid='atlassian-navigation--create-button']",
+        "summary_input": "input[name='summary']",
+        "work_type_dropdown": "input[id^='type-picker']",
+        "work_type_option_task": "div[data-testid='issue-field-select-base.ui.format-option-label.c-label']:has-text('Task')",
+        "create_submit": "button[type='submit']",
+        "created_issue_id": "a[data-testid='issue-created-key']",
+        "issue_summary": "h1[data-testid='issue.views.issue-base.foundation.summary.heading']",
+        "edit_button": "button[data-testid='edit-issue']",
+        "update_submit": "button[data-testid='issue-edit-submit']",
+        "delete_button": "button[aria-label='Delete']",
+        "confirm_delete": "button[data-testid='issue-delete-submit']",
+        "summary_edit_icon": "button[aria-label='Edit summary']",
+        "search_box": "input[id='search-box']",
+        "search_button": "button[id='search-button']",
+        "error_summary": "div[class='error-summary']",
+        "error_project": "div[class='error-project']",
+        "error_issuetype": "div[class='error-issuetype']"
+    }
+}

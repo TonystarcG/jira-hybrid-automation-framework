@@ -1,0 +1,14 @@
+This is a sample attachment file for Jira automation testing.
+
+Purpose:
+- To test the upload functionality of attachments via API.
+- To verify the visibility and integrity of attachments in the Jira UI.
+- To validate synchronization between API and UI for file metadata.
+
+Contents:
+- This file contains placeholder text and can be used in test cases involving:
+  * Comment and Attachment Sync
+  * Edge Case Handling (e.g., file size, format)
+  * Permission-Based Testing (e.g., upload with restricted tokens)
+
+End of sample content.

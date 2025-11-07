@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.0 on win32)" generated="2025-11-07T10:46:12.070751" rpa="false" schemaversion="5">
+<suite id="s1" name="test issues hybrid combined ref1 minimal2 5 25October" source="C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\test_issues_hybrid_combined_ref1_minimal2_5_25October.robot">
+<test id="s1-t1" name="Create Issues And Upload Attachment" line="19">
+<kw name="Load Doppler Secrets" owner="automation_framework.keywords.doppler_keywords.DopplerKeywords">
+<msg time="2025-11-07T10:46:13.749052" level="INFO">${API_TOKEN} = ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59lpF4k3LzxrbP_w6E=CD11CE27</msg>
+<msg time="2025-11-07T10:46:13.750192" level="INFO">${BASE_URL} = https://hritwick05sas.atlassian.net</msg>
+<msg time="2025-11-07T10:46:13.751020" level="INFO">${EMAIL} = hritwick.singh05@gmail.com</msg>
+<msg time="2025-11-07T10:46:13.751962" level="INFO">${PROJECT_KEY} = DPS</msg>
+<msg time="2025-11-07T10:46:13.752936" level="INFO">${ISSUES_FILE} = C:/Users/hrsing/PycharmProjects/PythonProject/Jira_Hybrid_AutomationFramework2/automation_framework/resources/issues.json</msg>
+<msg time="2025-11-07T10:46:13.753038" level="INFO">🔍 Loading Doppler secrets...
+Using project=jira-automation, config=dev</msg>
+<doc>Robot Framework keyword to load Doppler secrets and set them as variables.
+If access_token, project, or config are not provided, they are read from environment variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:12.678208" elapsed="1.074933"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.754444" level="INFO">${auth} = ['hritwick.singh05@gmail.com', 'ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59l...</msg>
+<var>${auth}</var>
+<arg>${EMAIL}</arg>
+<arg>${API_TOKEN}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.753857" elapsed="0.000641"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:13.755677" level="INFO">Creating Session using : alias=jira, url=https://hritwick05sas.atlassian.net, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x000001CADFA42F90&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>jira</arg>
+<arg>${BASE_URL}</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-11-07T10:46:13.755181" elapsed="0.000833"/>
+</kw>
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2025-11-07T10:46:13.762713" level="INFO">${data} = {'valid_issues': [{'summary': 'Valid API issue - Task', 'project_key': 'DPS', 'issue_type': 'Task'}, {'summary': 'Valid API issue - Bug', 'project_key': 'DPS', 'issue_type': 'Bug'}], 'invalid_issues':...</msg>
+<var>${data}</var>
+<arg>${ISSUES_FILE}</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.756621" elapsed="0.006159"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.764163" level="INFO">${issues} = [{'summary': 'Valid API issue - Task', 'project_key': 'DPS', 'issue_type': 'Task'}, {'summary': 'Valid API issue - Bug', 'project_key': 'DPS', 'issue_type': 'Bug'}]</msg>
+<var>${issues}</var>
+<arg>${data['valid_issues']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.763355" elapsed="0.000850"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.766018" level="INFO">${project} = {'key': 'DPS'}</msg>
+<var>${project}</var>
+<arg>key=${PROJECT_KEY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.765326" elapsed="0.000768"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.767178" level="INFO">${issuetype} = {'name': 'Task'}</msg>
+<var>${issuetype}</var>
+<arg>name=${issue['issue_type']}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.766427" elapsed="0.000771"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.767881" level="INFO">${fields} = {'project': {'key': 'DPS'}, 'summary': 'Valid API issue - Task', 'issuetype': {'name': 'Task'}}</msg>
+<var>${fields}</var>
+<arg>project=${project}</arg>
+<arg>summary=${issue['summary']}</arg>
+<arg>issuetype=${issuetype}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.767297" elapsed="0.000633"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.768499" level="INFO">${payload} = {'fields': {'project': {'key': 'DPS'}, 'summary': 'Valid API issue - Task', 'issuetype': {'name': 'Task'}}}</msg>
+<var>${payload}</var>
+<arg>fields=${fields}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.768165" elapsed="0.000379"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:13.768982" level="INFO">${headers} = {'Accept': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.768747" elapsed="0.000274"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:15.008766" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ path_url=/rest/api/3/issue 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Content-Length': '107', 'Content-Type': 'application/json', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'{"fields": {"project": {"key": "DPS"}, "summary": "Valid API issue - Task", "issuetype": {"name": "Task"}}}' 
+ </msg>
+<msg time="2025-11-07T10:46:15.009058" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:14 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '0f32224687da5b44b4d54a511c09f1d2', 'Set-Cookie': 'atlassian.xsrf.token=a25b4568f0c45230c036486007bf5802165c7864_lin; Path=/; SameSite=None; Secure', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '199', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': 'aaa97a503ee1465f97e34edcb9aa813a', 'Atl-Request-Id': 'aaa97a50-3ee1-465f-97e3-4edcb9aa813a', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 f6feb245804a4fdbb3bd412875abee12.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P2', 'X-Amz-Cf-Id': 'yij8HgZqU1JiT1-4o34HesHtOZMLMsYVl89dcEEaE-Yg5miatCjKRw==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=1133,atl-edge;dur=1128,atl-edge-internal;dur=136,atl-edge-upstream;dur=891,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P2",cdn-rid;desc="yij8HgZqU1JiT1-4o34HesHtOZMLMsYVl89dcEEaE-Yg5miatCjKRw==",cdn-downstream-fbl;dur=1136'} 
+ body={"id":"11397","key":"DPS-331","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11397"} 
+ </msg>
+<msg time="2025-11-07T10:46:15.009549" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:15.010139" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:13.769183" elapsed="1.241036"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-11-07T10:46:15.011562" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.010536" elapsed="0.001178"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:15.013176" level="INFO">${body} = {'id': '11397', 'key': 'DPS-331', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11397'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.011956" elapsed="0.001242"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:15.013392" level="INFO">${issue_id} = 11397</msg>
+<var>${issue_id}</var>
+<arg>${body}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.013280" elapsed="0.000130"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:15.013583" level="INFO">${issue_key} = DPS-331</msg>
+<var>${issue_key}</var>
+<arg>${body}</arg>
+<arg>key</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.013481" elapsed="0.000119"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:15.013765" level="INFO">Created Issue ID: 11397</msg>
+<arg>Created Issue ID: ${issue_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.013682" elapsed="0.000111"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${ISSUE_IDS}</arg>
+<arg>${issue_id}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.013858" elapsed="0.000091"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-07T10:46:15.014136" level="INFO">${file_tuple} = ['../../resources/attachments/sample_attachment.txt', '../../resources/attachments/sample_attachment.txt', 'text/plain']</msg>
+<var>${file_tuple}</var>
+<arg>${ATTACHMENT_PATH}</arg>
+<arg>${ATTACHMENT_PATH}</arg>
+<arg>text/plain</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.014018" elapsed="0.000138"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:15.014481" level="INFO">${upload_headers} = {'X-Atlassian-Token': 'no-check'}</msg>
+<var>${upload_headers}</var>
+<arg>X-Atlassian-Token=no-check</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.014234" elapsed="0.000266"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:15.014715" level="INFO">${files} = {'file': ['../../resources/attachments/sample_attachment.txt', '../../resources/attachments/sample_attachment.txt', 'text/plain']}</msg>
+<var>${files}</var>
+<arg>file=${file_tuple}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.014576" elapsed="0.000158"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:16.051619" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue/11397/attachments 
+ path_url=/rest/api/3/issue/11397/attachments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'X-Atlassian-Token': 'no-check', 'Cookie': 'atlassian.xsrf.token=a25b4568f0c45230c036486007bf5802165c7864_lin', 'Content-Length': '260', 'Content-Type': 'multipart/form-data; boundary=78f97082cb0530d55231dc891727e971', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'--78f97082cb0530d55231dc891727e971\r\nContent-Disposition: form-data; name="file"; filename="../../resources/attachments/sample_attachment.txt"\r\nContent-Type: text/plain\r\n\r\n../../resources/attachments/sample_attachment.txt\r\n--78f97082cb0530d55231dc891727e971--\r\n' 
+ </msg>
+<msg time="2025-11-07T10:46:16.051721" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue/11397/attachments 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:15 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '82cac1851379b8afe519db9930c64174', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '198', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '3827524295304c81917fe9ec3fab4c02', 'Atl-Request-Id': '38275242-9530-4c81-917f-e9ec3fab4c02', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 f6feb245804a4fdbb3bd412875abee12.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P2', 'X-Amz-Cf-Id': 'Iw24U8CNzHaVB0d44PekFAf9MAOzrPatOnRGNGcg-UGzhnlav1uj-g==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=1,cdn-upstream-fbl;dur=1013,atl-edge;dur=1006,atl-edge-internal;dur=138,atl-edge-upstream;dur=767,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P2",cdn-rid;desc="Iw24U8CNzHaVB0d44PekFAf9MAOzrPatOnRGNGcg-UGzhnlav1uj-g==",cdn-downstream-fbl;dur=1017'} 
+ body=[{"self":"https://hritwick05sas.atlassian.net/rest/api/3/attachment/10294","id":"10294","filename":"sample_attachment.txt","author":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/user?accountId=60be4e88a17463007045760a","accountId":"60be4e88a17463007045760a","emailAddress":"hritwick.singh05@gmail.com","avatarUrls":{"48x48":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","24x24":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","16x16":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","32x32":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png"},"displayName":"Hritwick Singh","active":true,"timeZone":"Asia/Calcutta","accountType":"atlassian"},"created":"2025-11-07T10:46:14.678+0530","size":49,"mimeType":"text/plain","content":"https://hritwick05sas.atlassian.net/rest/api/3/attachment/content/10294"}] 
+ </msg>
+<msg time="2025-11-07T10:46:16.051915" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:16.052179" level="INFO">${upload_response} = &lt;Response [200]&gt;</msg>
+<var>${upload_response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue/${issue_id}/attachments</arg>
+<arg>files=${files}</arg>
+<arg>headers=${upload_headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:15.014806" elapsed="1.037407"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${upload_response.status_code} == 200 or ${upload_response.status_code} == 201</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-11-07T10:46:16.052363" elapsed="0.000957"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:16.053535" level="INFO">Uploaded attachment to issue 11397</msg>
+<arg>Uploaded attachment to issue ${issue_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:16.053428" elapsed="0.000137"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2025-11-07T10:46:16.054737" level="INFO">Starting process:
+python automation_framework/tests/hybrid/validate_ui_attachment.py DPS-331</msg>
+<msg time="2025-11-07T10:46:16.278581" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-11-07T10:46:20.373623" level="INFO">Process completed.</msg>
+<msg time="2025-11-07T10:46:20.373866" level="INFO">${result} = &lt;result object with rc 1&gt;</msg>
+<var>${result}</var>
+<arg>python</arg>
+<arg>automation_framework/tests/hybrid/validate_ui_attachment.py</arg>
+<arg>${issue_key}</arg>
+<arg>shell=True</arg>
+<arg>stdout=PIPE</arg>
+<arg>stderr=PIPE</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2025-11-07T10:46:16.053637" elapsed="4.320269"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.397553" level="INFO">STDOUT: === DEBUG: Python Environment ===
+Current Working Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Script Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+Project Root: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Python sys.path:
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\python313.zip
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\DLLs
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+[SUCCESS] Module 'automation_framework' is importable.
+[SUCCESS] Imported JiraUI successfully.
+Traceback (most recent call last):
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 57, in &lt;module&gt;
+    main()
+    ~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 52, in main
+    jira.start_browser()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\keywords\playwright_helpers_modified.py", line 17, in start_browser
+    self.context = self.browser.new_context(storage_state=auth_file)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\sync_api\_generated.py", line 13969, in new_context
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.new_context(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...&lt;36 lines&gt;...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser.py", line 169, in new_context
+    await self._browser_type._prepare_browser_context_params(params)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser_type.py", line 317, in _prepare_browser_context_params
+    (await async_readfile(storageState)).decode()
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 537, in async_readfile
+    return await loop.run_in_executor(None, inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 533, in inner
+    with open(file, "rb") as fh:
+         ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'automation_framework/resources/auth.json'</msg>
+<arg>STDOUT: ${result.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.374927" elapsed="0.022816"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.408033" level="INFO">STDERR: === DEBUG: Python Environment ===
+Current Working Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Script Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+Project Root: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Python sys.path:
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\python313.zip
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\DLLs
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+[SUCCESS] Module 'automation_framework' is importable.
+[SUCCESS] Imported JiraUI successfully.
+Traceback (most recent call last):
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 57, in &lt;module&gt;
+    main()
+    ~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 52, in main
+    jira.start_browser()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\keywords\playwright_helpers_modified.py", line 17, in start_browser
+    self.context = self.browser.new_context(storage_state=auth_file)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\sync_api\_generated.py", line 13969, in new_context
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.new_context(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...&lt;36 lines&gt;...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser.py", line 169, in new_context
+    await self._browser_type._prepare_browser_context_params(params)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser_type.py", line 317, in _prepare_browser_context_params
+    (await async_readfile(storageState)).decode()
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 537, in async_readfile
+    return await loop.run_in_executor(None, inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 533, in inner
+    with open(file, "rb") as fh:
+         ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'automation_framework/resources/auth.json'</msg>
+<arg>STDERR: ${result.stderr}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.397955" elapsed="0.010339"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.410087" level="INFO">RETURN CODE: 1</msg>
+<arg>RETURN CODE: ${result.rc}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.408539" elapsed="0.001659"/>
+</kw>
+<var name="${issue}">{'summary': 'Valid API issue - Task', 'project_key': 'DPS', 'issue_type': 'Task'}</var>
+<status status="PASS" start="2025-11-07T10:46:13.765128" elapsed="6.645187"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.411201" level="INFO">${project} = {'key': 'DPS'}</msg>
+<var>${project}</var>
+<arg>key=${PROJECT_KEY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.410818" elapsed="0.000421"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.412135" level="INFO">${issuetype} = {'name': 'Bug'}</msg>
+<var>${issuetype}</var>
+<arg>name=${issue['issue_type']}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.411410" elapsed="0.000759"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.413064" level="INFO">${fields} = {'project': {'key': 'DPS'}, 'summary': 'Valid API issue - Bug', 'issuetype': {'name': 'Bug'}}</msg>
+<var>${fields}</var>
+<arg>project=${project}</arg>
+<arg>summary=${issue['summary']}</arg>
+<arg>issuetype=${issuetype}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.412312" elapsed="0.000846"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.413597" level="INFO">${payload} = {'fields': {'project': {'key': 'DPS'}, 'summary': 'Valid API issue - Bug', 'issuetype': {'name': 'Bug'}}}</msg>
+<var>${payload}</var>
+<arg>fields=${fields}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.413340" elapsed="0.000300"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:20.414000" level="INFO">${headers} = {'Accept': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.413811" elapsed="0.000216"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:21.353523" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ path_url=/rest/api/3/issue 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Cookie': 'atlassian.xsrf.token=a25b4568f0c45230c036486007bf5802165c7864_lin', 'Content-Length': '105', 'Content-Type': 'application/json', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'{"fields": {"project": {"key": "DPS"}, "summary": "Valid API issue - Bug", "issuetype": {"name": "Bug"}}}' 
+ </msg>
+<msg time="2025-11-07T10:46:21.353757" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:20 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '6ce6da85bf1ed33187be766a6245fa93', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '199', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': 'dfeec5a92ead447f8d6fe5f6bbf44ecc', 'Atl-Request-Id': 'dfeec5a9-2ead-447f-8d6f-e5f6bbf44ecc', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 f6feb245804a4fdbb3bd412875abee12.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P2', 'X-Amz-Cf-Id': 'MJP19I0Z3mME8LMZYXshxgLEhfCie_1pKmiOcfUeY8ulQwZD0GrXtQ==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=1,cdn-upstream-fbl;dur=906,atl-edge;dur=900,atl-edge-internal;dur=139,atl-edge-upstream;dur=660,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P2",cdn-rid;desc="MJP19I0Z3mME8LMZYXshxgLEhfCie_1pKmiOcfUeY8ulQwZD0GrXtQ==",cdn-downstream-fbl;dur=911'} 
+ body={"id":"11398","key":"DPS-332","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11398"} 
+ </msg>
+<msg time="2025-11-07T10:46:21.353917" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:21.354478" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:20.414190" elapsed="0.940381"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-11-07T10:46:21.355998" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.354904" elapsed="0.001218"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:21.357525" level="INFO">${body} = {'id': '11398', 'key': 'DPS-332', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11398'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.356391" elapsed="0.001191"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:21.358145" level="INFO">${issue_id} = 11398</msg>
+<var>${issue_id}</var>
+<arg>${body}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.357793" elapsed="0.000405"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:21.358705" level="INFO">${issue_key} = DPS-332</msg>
+<var>${issue_key}</var>
+<arg>${body}</arg>
+<arg>key</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.358406" elapsed="0.000348"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:21.359171" level="INFO">Created Issue ID: 11398</msg>
+<arg>Created Issue ID: ${issue_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.358956" elapsed="0.000291"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${ISSUE_IDS}</arg>
+<arg>${issue_id}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.359417" elapsed="0.000539"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-07T10:46:21.360467" level="INFO">${file_tuple} = ['../../resources/attachments/sample_attachment.txt', '../../resources/attachments/sample_attachment.txt', 'text/plain']</msg>
+<var>${file_tuple}</var>
+<arg>${ATTACHMENT_PATH}</arg>
+<arg>${ATTACHMENT_PATH}</arg>
+<arg>text/plain</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.360160" elapsed="0.000353"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:21.361003" level="INFO">${upload_headers} = {'X-Atlassian-Token': 'no-check'}</msg>
+<var>${upload_headers}</var>
+<arg>X-Atlassian-Token=no-check</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.360713" elapsed="0.000335"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:21.361571" level="INFO">${files} = {'file': ['../../resources/attachments/sample_attachment.txt', '../../resources/attachments/sample_attachment.txt', 'text/plain']}</msg>
+<var>${files}</var>
+<arg>file=${file_tuple}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.361228" elapsed="0.000390"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:22.328004" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue/11398/attachments 
+ path_url=/rest/api/3/issue/11398/attachments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'X-Atlassian-Token': 'no-check', 'Cookie': 'atlassian.xsrf.token=a25b4568f0c45230c036486007bf5802165c7864_lin', 'Content-Length': '260', 'Content-Type': 'multipart/form-data; boundary=306f79440fdc95a1576f6ebe9f6e1589', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'--306f79440fdc95a1576f6ebe9f6e1589\r\nContent-Disposition: form-data; name="file"; filename="../../resources/attachments/sample_attachment.txt"\r\nContent-Type: text/plain\r\n\r\n../../resources/attachments/sample_attachment.txt\r\n--306f79440fdc95a1576f6ebe9f6e1589--\r\n' 
+ </msg>
+<msg time="2025-11-07T10:46:22.328239" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue/11398/attachments 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:21 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '181843f47271d0a446d3463bb84c0be1', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '199', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '19f602d9494d4d078f3a3e4d2c7d9f7c', 'Atl-Request-Id': '19f602d9-494d-4d07-8f3a-3e4d2c7d9f7c', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 f6feb245804a4fdbb3bd412875abee12.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P2', 'X-Amz-Cf-Id': 'hlw_hIMz6RJCQpraBoDSKFY8Gotco7N-XCL4wSYr4mu42kJfxwqJLA==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=946,atl-edge;dur=941,atl-edge-internal;dur=136,atl-edge-upstream;dur=703,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P2",cdn-rid;desc="hlw_hIMz6RJCQpraBoDSKFY8Gotco7N-XCL4wSYr4mu42kJfxwqJLA==",cdn-downstream-fbl;dur=952'} 
+ body=[{"self":"https://hritwick05sas.atlassian.net/rest/api/3/attachment/10295","id":"10295","filename":"sample_attachment.txt","author":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/user?accountId=60be4e88a17463007045760a","accountId":"60be4e88a17463007045760a","emailAddress":"hritwick.singh05@gmail.com","avatarUrls":{"48x48":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","24x24":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","16x16":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","32x32":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png"},"displayName":"Hritwick Singh","active":true,"timeZone":"Asia/Calcutta","accountType":"atlassian"},"created":"2025-11-07T10:46:21.011+0530","size":49,"mimeType":"text/plain","content":"https://hritwick05sas.atlassian.net/rest/api/3/attachment/content/10295"}] 
+ </msg>
+<msg time="2025-11-07T10:46:22.328404" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:22.329118" level="INFO">${upload_response} = &lt;Response [200]&gt;</msg>
+<var>${upload_response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue/${issue_id}/attachments</arg>
+<arg>files=${files}</arg>
+<arg>headers=${upload_headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:21.361788" elapsed="0.967411"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${upload_response.status_code} == 200 or ${upload_response.status_code} == 201</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-11-07T10:46:22.329508" elapsed="0.002539"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:22.332583" level="INFO">Uploaded attachment to issue 11398</msg>
+<arg>Uploaded attachment to issue ${issue_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:22.332311" elapsed="0.000382"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2025-11-07T10:46:22.335299" level="INFO">Starting process:
+python automation_framework/tests/hybrid/validate_ui_attachment.py DPS-332</msg>
+<msg time="2025-11-07T10:46:22.398980" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-11-07T10:46:24.783606" level="INFO">Process completed.</msg>
+<msg time="2025-11-07T10:46:24.783886" level="INFO">${result} = &lt;result object with rc 1&gt;</msg>
+<var>${result}</var>
+<arg>python</arg>
+<arg>automation_framework/tests/hybrid/validate_ui_attachment.py</arg>
+<arg>${issue_key}</arg>
+<arg>shell=True</arg>
+<arg>stdout=PIPE</arg>
+<arg>stderr=PIPE</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2025-11-07T10:46:22.332898" elapsed="2.451043"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:24.799272" level="INFO">STDOUT: === DEBUG: Python Environment ===
+Current Working Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Script Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+Project Root: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Python sys.path:
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\python313.zip
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\DLLs
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+[SUCCESS] Module 'automation_framework' is importable.
+[SUCCESS] Imported JiraUI successfully.
+Traceback (most recent call last):
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 57, in &lt;module&gt;
+    main()
+    ~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 52, in main
+    jira.start_browser()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\keywords\playwright_helpers_modified.py", line 17, in start_browser
+    self.context = self.browser.new_context(storage_state=auth_file)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\sync_api\_generated.py", line 13969, in new_context
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.new_context(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...&lt;36 lines&gt;...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser.py", line 169, in new_context
+    await self._browser_type._prepare_browser_context_params(params)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser_type.py", line 317, in _prepare_browser_context_params
+    (await async_readfile(storageState)).decode()
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 537, in async_readfile
+    return await loop.run_in_executor(None, inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 533, in inner
+    with open(file, "rb") as fh:
+         ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'automation_framework/resources/auth.json'</msg>
+<arg>STDOUT: ${result.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:24.784203" elapsed="0.015309"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:24.810164" level="INFO">STDERR: === DEBUG: Python Environment ===
+Current Working Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Script Directory: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+Project Root: C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+Python sys.path:
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\python313.zip
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\DLLs
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib
+ - C:\Users\hrsing\AppData\Local\Programs\Python\Python313
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages
+ - C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2
+[SUCCESS] Module 'automation_framework' is importable.
+[SUCCESS] Imported JiraUI successfully.
+Traceback (most recent call last):
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 57, in &lt;module&gt;
+    main()
+    ~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\validate_ui_attachment.py", line 52, in main
+    jira.start_browser()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\keywords\playwright_helpers_modified.py", line 17, in start_browser
+    self.context = self.browser.new_context(storage_state=auth_file)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\sync_api\_generated.py", line 13969, in new_context
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.new_context(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...&lt;36 lines&gt;...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser.py", line 169, in new_context
+    await self._browser_type._prepare_browser_context_params(params)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_browser_type.py", line 317, in _prepare_browser_context_params
+    (await async_readfile(storageState)).decode()
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 537, in async_readfile
+    return await loop.run_in_executor(None, inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hrsing\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\venv_stable\Lib\site-packages\playwright\_impl\_helper.py", line 533, in inner
+    with open(file, "rb") as fh:
+         ~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'automation_framework/resources/auth.json'</msg>
+<arg>STDERR: ${result.stderr}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:24.799758" elapsed="0.010549"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:24.811575" level="INFO">RETURN CODE: 1</msg>
+<arg>RETURN CODE: ${result.rc}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:24.810519" elapsed="0.001122"/>
+</kw>
+<var name="${issue}">{'summary': 'Valid API issue - Bug', 'project_key': 'DPS', 'issue_type': 'Bug'}</var>
+<status status="PASS" start="2025-11-07T10:46:20.410639" elapsed="4.401053"/>
+</iter>
+<var>${issue}</var>
+<value>@{issues}</value>
+<status status="PASS" start="2025-11-07T10:46:13.764625" elapsed="11.047118"/>
+</for>
+<status status="PASS" start="2025-11-07T10:46:12.677442" elapsed="12.136497"/>
+</test>
+<test id="s1-t2" name="Workflow Status Transition Test" line="65">
+<kw name="Load Doppler Secrets" owner="automation_framework.keywords.doppler_keywords.DopplerKeywords">
+<msg time="2025-11-07T10:46:25.945468" level="INFO">${API_TOKEN} = ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59lpF4k3LzxrbP_w6E=CD11CE27</msg>
+<msg time="2025-11-07T10:46:25.945757" level="INFO">${BASE_URL} = https://hritwick05sas.atlassian.net</msg>
+<msg time="2025-11-07T10:46:25.946240" level="INFO">${EMAIL} = hritwick.singh05@gmail.com</msg>
+<msg time="2025-11-07T10:46:25.946459" level="INFO">${PROJECT_KEY} = DPS</msg>
+<msg time="2025-11-07T10:46:25.946736" level="INFO">${ISSUES_FILE} = C:/Users/hrsing/PycharmProjects/PythonProject/Jira_Hybrid_AutomationFramework2/automation_framework/resources/issues.json</msg>
+<msg time="2025-11-07T10:46:25.946862" level="INFO">🔍 Loading Doppler secrets...
+Using project=jira-automation, config=dev</msg>
+<doc>Robot Framework keyword to load Doppler secrets and set them as variables.
+If access_token, project, or config are not provided, they are read from environment variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:24.824581" elapsed="1.122384"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-07T10:46:25.948254" level="INFO">${auth} = ['hritwick.singh05@gmail.com', 'ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59l...</msg>
+<var>${auth}</var>
+<arg>${EMAIL}</arg>
+<arg>${API_TOKEN}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.947749" elapsed="0.000575"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:25.949468" level="INFO">Creating Session using : alias=jira, url=https://hritwick05sas.atlassian.net, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x000001CADFB9AD50&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>jira</arg>
+<arg>${BASE_URL}</arg>
+<arg>auth=${auth}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-11-07T10:46:25.948884" elapsed="0.000886"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:25.950973" level="INFO">${project} = {'key': 'DPS'}</msg>
+<var>${project}</var>
+<arg>key=${PROJECT_KEY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.950428" elapsed="0.000605"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:25.952045" level="INFO">${issuetype} = {'name': 'Task'}</msg>
+<var>${issuetype}</var>
+<arg>name=Task</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.951662" elapsed="0.000441"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:25.953543" level="INFO">${fields} = {'project': {'key': 'DPS'}, 'summary': 'Workflow Transition Test', 'issuetype': {'name': 'Task'}}</msg>
+<var>${fields}</var>
+<arg>project=${project}</arg>
+<arg>summary=Workflow Transition Test</arg>
+<arg>issuetype=${issuetype}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.952967" elapsed="0.000637"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:25.954833" level="INFO">${payload} = {'fields': {'project': {'key': 'DPS'}, 'summary': 'Workflow Transition Test', 'issuetype': {'name': 'Task'}}}</msg>
+<var>${payload}</var>
+<arg>fields=${fields}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.954325" elapsed="0.000580"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:25.955899" level="INFO">${headers} = {'Accept': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.955526" elapsed="0.000430"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:26.835715" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ path_url=/rest/api/3/issue 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Content-Length': '109', 'Content-Type': 'application/json', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'{"fields": {"project": {"key": "DPS"}, "summary": "Workflow Transition Test", "issuetype": {"name": "Task"}}}' 
+ </msg>
+<msg time="2025-11-07T10:46:26.835973" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:26 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': 'b5ba4cecfff8ecec78ff44f0f43d644d', 'Set-Cookie': 'atlassian.xsrf.token=06cf1608a7d6f48c0738500ebacdc77b358221f4_lin; Path=/; SameSite=None; Secure', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '199', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '6c7bc3222aac4f8a80221693630ec2d7', 'Atl-Request-Id': '6c7bc322-2aac-4f8a-8022-1693630ec2d7', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 d921d59804f529f8264802ca2380ea54.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P1', 'X-Amz-Cf-Id': 'MZfzuwUu15QJoC2I-kAvuIlExt9u3e1OSv8ioWqlUGPsUfAbcHCUuA==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=1,cdn-upstream-fbl;dur=786,atl-edge;dur=777,atl-edge-internal;dur=14,atl-edge-upstream;dur=764,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P1",cdn-rid;desc="MZfzuwUu15QJoC2I-kAvuIlExt9u3e1OSv8ioWqlUGPsUfAbcHCUuA==",cdn-downstream-fbl;dur=790'} 
+ body={"id":"11399","key":"DPS-333","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11399"} 
+ </msg>
+<msg time="2025-11-07T10:46:26.836112" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:26.836746" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:25.956539" elapsed="0.880290"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-11-07T10:46:26.839826" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-07T10:46:26.838284" elapsed="0.001723"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:26.842418" level="INFO">${body} = {'id': '11399', 'key': 'DPS-333', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11399'}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:26.840671" elapsed="0.001835"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:26.843537" level="INFO">${issue_key} = DPS-333</msg>
+<var>${issue_key}</var>
+<arg>${body}</arg>
+<arg>key</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:26.843046" elapsed="0.000566"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:26.844539" level="INFO">Created Issue Key: DPS-333</msg>
+<arg>Created Issue Key: ${issue_key}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:26.844180" elapsed="0.000504"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2025-11-07T10:46:26.846295" level="INFO">Starting process:
+python automation_framework/tests/hybrid/helpers_updated.py https://hritwick05sas.atlassian.net hritwick.singh05@gmail.com ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59lpF4k3LzxrbP_w6E=CD11CE27 DPS-333 Done</msg>
+<msg time="2025-11-07T10:46:26.919978" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-11-07T10:46:27.104955" level="INFO">Process completed.</msg>
+<msg time="2025-11-07T10:46:27.105099" level="INFO">${result} = &lt;result object with rc 2&gt;</msg>
+<var>${result}</var>
+<arg>python</arg>
+<arg>automation_framework/tests/hybrid/helpers_updated.py</arg>
+<arg>${BASE_URL}</arg>
+<arg>${EMAIL}</arg>
+<arg>${API_TOKEN}</arg>
+<arg>${issue_key}</arg>
+<arg>Done</arg>
+<arg>shell=True</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2025-11-07T10:46:26.845443" elapsed="0.259677"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:27.106004" level="INFO">Transition Result: </msg>
+<arg>Transition Result: ${result.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.105510" elapsed="0.000530"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2025-11-07T10:46:27.107244" level="INFO">Starting process:
+python automation_framework/tests/hybrid/validate_status_api.py DPS-333 Done</msg>
+<msg time="2025-11-07T10:46:27.168556" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-11-07T10:46:27.719384" level="INFO">Process completed.</msg>
+<msg time="2025-11-07T10:46:27.719612" level="INFO">${ui_result} = &lt;result object with rc 1&gt;</msg>
+<var>${ui_result}</var>
+<arg>python</arg>
+<arg>automation_framework/tests/hybrid/validate_status_api.py</arg>
+<arg>${issue_key}</arg>
+<arg>Done</arg>
+<arg>shell=True</arg>
+<arg>stdout=PIPE</arg>
+<arg>stderr=PIPE</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.106454" elapsed="0.613181"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:27.721578" level="INFO">UI Validation STDOUT: Missing required environment variables: BASE_URL, EMAIL, API_TOKEN</msg>
+<arg>UI Validation STDOUT: ${ui_result.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.720041" elapsed="0.001579"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:27.723219" level="INFO">UI Validation STDERR: Missing required environment variables: BASE_URL, EMAIL, API_TOKEN</msg>
+<arg>UI Validation STDERR: ${ui_result.stderr}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.722283" elapsed="0.000989"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:27.723813" level="INFO">RETURN CODE: 1</msg>
+<arg>RETURN CODE: ${ui_result.rc}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.723443" elapsed="0.000398"/>
+</kw>
+<doc>Create issue via API, transition status to Done, validate via UI</doc>
+<status status="PASS" start="2025-11-07T10:46:24.823834" elapsed="2.900509"/>
+</test>
+<test id="s1-t3" name="Issue Linking Test" line="128">
+<kw name="Load Doppler Secrets" owner="automation_framework.keywords.doppler_keywords.DopplerKeywords">
+<msg time="2025-11-07T10:46:28.757622" level="INFO">${API_TOKEN} = ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59lpF4k3LzxrbP_w6E=CD11CE27</msg>
+<msg time="2025-11-07T10:46:28.757998" level="INFO">${BASE_URL} = https://hritwick05sas.atlassian.net</msg>
+<msg time="2025-11-07T10:46:28.758294" level="INFO">${EMAIL} = hritwick.singh05@gmail.com</msg>
+<msg time="2025-11-07T10:46:28.758584" level="INFO">${PROJECT_KEY} = DPS</msg>
+<msg time="2025-11-07T10:46:28.758843" level="INFO">${ISSUES_FILE} = C:/Users/hrsing/PycharmProjects/PythonProject/Jira_Hybrid_AutomationFramework2/automation_framework/resources/issues.json</msg>
+<msg time="2025-11-07T10:46:28.758984" level="INFO">🔍 Loading Doppler secrets...
+Using project=jira-automation, config=dev</msg>
+<doc>Robot Framework keyword to load Doppler secrets and set them as variables.
+If access_token, project, or config are not provided, they are read from environment variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.725558" elapsed="1.033572"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-07T10:46:28.760266" level="INFO">${auth} = ['hritwick.singh05@gmail.com', 'ATATT3xFfGF0K_e3awkZdixUIV8uAU5Sv4NHcjNsN6ZoTLmzVZP_pD_u_3L8GZl1SyKq_pajZOM-onkbClePSYzuTItPjOO7Qd-YBCmMz3t9aSmRPp5hRKq3Mm9hA27_jhzYRru9dya5-1Ion_sT74yx-gxL6LMxFSgPn59l...</msg>
+<var>${auth}</var>
+<arg>${EMAIL}</arg>
+<arg>${API_TOKEN}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.759957" elapsed="0.000410"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:28.761029" level="INFO">Creating Session using : alias=jira, url=https://hritwick05sas.atlassian.net, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x000001CADFA73B10&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>jira</arg>
+<arg>${BASE_URL}</arg>
+<arg>auth=${auth}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-11-07T10:46:28.760749" elapsed="0.000440"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:28.761802" level="INFO">${headers} = {'Accept': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.761594" elapsed="0.000233"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:28.762325" level="INFO">${project} = {'key': 'DPS'}</msg>
+<var>${project}</var>
+<arg>key=${PROJECT_KEY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.762130" elapsed="0.000217"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:28.763306" level="INFO">${issuetype} = {'name': 'Task'}</msg>
+<var>${issuetype}</var>
+<arg>name=Task</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.762998" elapsed="0.000334"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:28.763846" level="INFO">${fields_a} = {'project': {'key': 'DPS'}, 'summary': 'Linked Issue A', 'issuetype': {'name': 'Task'}}</msg>
+<var>${fields_a}</var>
+<arg>project=${project}</arg>
+<arg>summary=Linked Issue A</arg>
+<arg>issuetype=${issuetype}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.763583" elapsed="0.000290"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:28.764290" level="INFO">${payload_a} = {'fields': {'project': {'key': 'DPS'}, 'summary': 'Linked Issue A', 'issuetype': {'name': 'Task'}}}</msg>
+<var>${payload_a}</var>
+<arg>fields=${fields_a}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.764104" elapsed="0.000211"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:29.782250" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ path_url=/rest/api/3/issue 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Content-Length': '99', 'Content-Type': 'application/json', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'{"fields": {"project": {"key": "DPS"}, "summary": "Linked Issue A", "issuetype": {"name": "Task"}}}' 
+ </msg>
+<msg time="2025-11-07T10:46:29.782392" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:29 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '0e709a2c37ce6d1b92827e7cc60977f1', 'Set-Cookie': 'atlassian.xsrf.token=f30ed0a340800ff9af612ff6ca5947239e756f90_lin; Path=/; SameSite=None; Secure', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '199', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': 'd11f049588514a06991fbb557a11d251', 'Atl-Request-Id': 'd11f0495-8851-4a06-991f-bb557a11d251', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 9c1cf4908c1d2ede71b7f4eba4999b20.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P7', 'X-Amz-Cf-Id': 'eLze44XdRPq9mzidULArTQuyqF-cVp_SaZIuTzrdYq72GuJHgv_nLA==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=1,cdn-upstream-fbl;dur=942,atl-edge;dur=937,atl-edge-internal;dur=139,atl-edge-upstream;dur=696,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P7",cdn-rid;desc="eLze44XdRPq9mzidULArTQuyqF-cVp_SaZIuTzrdYq72GuJHgv_nLA==",cdn-downstream-fbl;dur=947'} 
+ body={"id":"11400","key":"DPS-334","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11400"} 
+ </msg>
+<msg time="2025-11-07T10:46:29.782562" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:29.782986" level="INFO">${response_a} = &lt;Response [201]&gt;</msg>
+<var>${response_a}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue</arg>
+<arg>json=${payload_a}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:28.764585" elapsed="1.018461"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-11-07T10:46:29.784598" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response_a.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.783991" elapsed="0.000676"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:29.785640" level="INFO">${issue_a} = {'id': '11400', 'key': 'DPS-334', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11400'}</msg>
+<var>${issue_a}</var>
+<arg>${response_a.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.785045" elapsed="0.000646"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:29.786400" level="INFO">${issue_key_a} = DPS-334</msg>
+<var>${issue_key_a}</var>
+<arg>${issue_a}</arg>
+<arg>key</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.786124" elapsed="0.000305"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:29.786859" level="INFO">Created Issue A: DPS-334</msg>
+<arg>Created Issue A: ${issue_key_a}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.786704" elapsed="0.000209"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:29.787443" level="INFO">${fields_b} = {'project': {'key': 'DPS'}, 'summary': 'Linked Issue B', 'issuetype': {'name': 'Task'}}</msg>
+<var>${fields_b}</var>
+<arg>project=${project}</arg>
+<arg>summary=Linked Issue B</arg>
+<arg>issuetype=${issuetype}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.787145" elapsed="0.000329"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:29.788081" level="INFO">${payload_b} = {'fields': {'project': {'key': 'DPS'}, 'summary': 'Linked Issue B', 'issuetype': {'name': 'Task'}}}</msg>
+<var>${payload_b}</var>
+<arg>fields=${fields_b}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.787795" elapsed="0.000319"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:30.550026" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ path_url=/rest/api/3/issue 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Cookie': 'atlassian.xsrf.token=f30ed0a340800ff9af612ff6ca5947239e756f90_lin', 'Content-Length': '99', 'Content-Type': 'application/json', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'{"fields": {"project": {"key": "DPS"}, "summary": "Linked Issue B", "issuetype": {"name": "Task"}}}' 
+ </msg>
+<msg time="2025-11-07T10:46:30.550241" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:29 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': 'a9efac5689c8e07f0722dc6f49a20678', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '198', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '99c0d7962bc4415f9cb0467dcb9df729', 'Atl-Request-Id': '99c0d796-2bc4-415f-9cb0-467dcb9df729', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 9c1cf4908c1d2ede71b7f4eba4999b20.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P7', 'X-Amz-Cf-Id': 'f3yvRJGQYOhJF-pfyPC1v1mzy63bwkYe-GU8tUtLZP5iYy-CvtA_2Q==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=737,atl-edge;dur=733,atl-edge-internal;dur=13,atl-edge-upstream;dur=720,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P7",cdn-rid;desc="f3yvRJGQYOhJF-pfyPC1v1mzy63bwkYe-GU8tUtLZP5iYy-CvtA_2Q==",cdn-downstream-fbl;dur=741'} 
+ body={"id":"11401","key":"DPS-335","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11401"} 
+ </msg>
+<msg time="2025-11-07T10:46:30.550371" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:30.550955" level="INFO">${response_b} = &lt;Response [201]&gt;</msg>
+<var>${response_b}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue</arg>
+<arg>json=${payload_b}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:29.788474" elapsed="0.762548"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.552806" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response_b.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.551654" elapsed="0.001224"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.554167" level="INFO">${issue_b} = {'id': '11401', 'key': 'DPS-335', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11401'}</msg>
+<var>${issue_b}</var>
+<arg>${response_b.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.553548" elapsed="0.000654"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:30.554665" level="INFO">${issue_key_b} = DPS-335</msg>
+<var>${issue_key_b}</var>
+<arg>${issue_b}</arg>
+<arg>key</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.554464" elapsed="0.000229"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.555516" level="INFO">Created Issue B: DPS-335</msg>
+<arg>Created Issue B: ${issue_key_b}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.555225" elapsed="0.000446"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.556305" level="INFO">${link_type} = {'name': 'Blocks'}</msg>
+<var>${link_type}</var>
+<arg>name=Blocks</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.556008" elapsed="0.000343"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.557037" level="INFO">${inward} = {'key': 'DPS-334'}</msg>
+<var>${inward}</var>
+<arg>key=${issue_key_a}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.556687" elapsed="0.000400"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.557723" level="INFO">${outward} = {'key': 'DPS-335'}</msg>
+<var>${outward}</var>
+<arg>key=${issue_key_b}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.557462" elapsed="0.000297"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.558527" level="INFO">${link_payload} = {'type': {'name': 'Blocks'}, 'inwardIssue': {'key': 'DPS-334'}, 'outwardIssue': {'key': 'DPS-335'}}</msg>
+<var>${link_payload}</var>
+<arg>type=${link_type}</arg>
+<arg>inwardIssue=${inward}</arg>
+<arg>outwardIssue=${outward}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.558126" elapsed="0.000435"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-07T10:46:30.559411" level="INFO">${link_headers} = {'Content-Type': 'application/json'}</msg>
+<var>${link_headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.559104" elapsed="0.000350"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:31.084321" level="INFO">POST Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issueLink 
+ path_url=/rest/api/3/issueLink 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Cookie': 'atlassian.xsrf.token=f30ed0a340800ff9af612ff6ca5947239e756f90_lin', 'Content-Length': '99', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=b'{"type": {"name": "Blocks"}, "inwardIssue": {"key": "DPS-334"}, "outwardIssue": {"key": "DPS-335"}}' 
+ </msg>
+<msg time="2025-11-07T10:46:31.084476" level="INFO">POST Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issueLink 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '0', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:30 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '36e23c6a12cbf7cec047afef43c9eb8e', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '200', 'X-Ratelimit-Remaining': '199', 'Location': 'https://hritwick05sas.atlassian.net/rest/api/3/issueLink/10153', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': 'fc10257267c54ee58f345a614af09526', 'Atl-Request-Id': 'fc102572-67c5-4ee5-8f34-5a614af09526', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 9c1cf4908c1d2ede71b7f4eba4999b20.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P7', 'X-Amz-Cf-Id': 'r6vyiItB342WLINmIxnjWb_-BUu5-T-m-H0Tf5N9HwUIcB-E2bYqYQ==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=510,atl-edge;dur=504,atl-edge-internal;dur=14,atl-edge-upstream;dur=490,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P7",cdn-rid;desc="r6vyiItB342WLINmIxnjWb_-BUu5-T-m-H0Tf5N9HwUIcB-E2bYqYQ==",cdn-downstream-fbl;dur=513'} 
+ body=None 
+ </msg>
+<msg time="2025-11-07T10:46:31.084579" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:31.084927" level="INFO">${link_response} = &lt;Response [201]&gt;</msg>
+<var>${link_response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issueLink</arg>
+<arg>json=${link_payload}</arg>
+<arg>headers=${link_headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:30.559864" elapsed="0.525126"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${link_response.status_code} == 201 or ${link_response.status_code} == 200</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.085356" elapsed="0.001431"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.087159" level="INFO">Linked DPS-335 blocks DPS-334</msg>
+<arg>Linked ${issue_key_b} blocks ${issue_key_a}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.087019" elapsed="0.000174"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.087727" level="INFO">Link Response Content: </msg>
+<arg>Link Response Content: ${link_response.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.087381" elapsed="0.000378"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-07T10:46:31.594141" level="INFO">GET Request : url=https://hritwick05sas.atlassian.net/rest/api/3/issue/DPS-334 
+ path_url=/rest/api/3/issue/DPS-334 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Cookie': 'atlassian.xsrf.token=f30ed0a340800ff9af612ff6ca5947239e756f90_lin', 'Authorization': 'Basic aHJpdHdpY2suc2luZ2gwNUBnbWFpbC5jb206QVRBVFQzeEZmR0YwS19lM2F3a1pkaXhVSVY4dUFVNVN2NE5IY2pOc042Wm9UTG16VlpQX3BEX3VfM0w4R1psMVN5S3FfcGFqWk9NLW9ua2JDbGVQU1l6dVRJdFBqT083UWQtWUJDbU16M3Q5YVNtUlBwNWhSS3EzTW05aEEyN19qaHpZUnJ1OWR5YTUtMUlvbl9zVDc0eXgtZ3hMNkxNeEZTZ1BuNTlscEY0azNMenhyYlBfdzZFPUNEMTFDRTI3'} 
+ body=None 
+ </msg>
+<msg time="2025-11-07T10:46:31.594416" level="INFO">GET Response : url=https://hritwick05sas.atlassian.net/rest/api/3/issue/DPS-334 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Fri, 07 Nov 2025 05:16:30 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '25fabe161d1eab8a44a59485e5d5092a', 'X-Aaccountid': '60be4e88a17463007045760a', 'Cache-Control': 'no-cache, no-store, no-transform', 'X-Ratelimit-Limit': '400', 'X-Ratelimit-Remaining': '399', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '45d8f3056e114d36a995b9efed77a3b5', 'Atl-Request-Id': '45d8f305-6e11-4d36-a995-b9efed77a3b5', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 9c1cf4908c1d2ede71b7f4eba4999b20.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BOM78-P7', 'X-Amz-Cf-Id': 'THwDLkOYuqbW8RSvlMGjR1RUByadYCUroOd9EBmPQYEH8l_pyfKWjQ==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=1,cdn-upstream-fbl;dur=484,atl-edge;dur=476,atl-edge-internal;dur=146,atl-edge-upstream;dur=229,atl-edge-pop;desc="aws-ap-south-1",cdn-cache-miss,cdn-pop;desc="BOM78-P7",cdn-rid;desc="THwDLkOYuqbW8RSvlMGjR1RUByadYCUroOd9EBmPQYEH8l_pyfKWjQ==",cdn-downstream-fbl;dur=491'} 
+ body={"expand":"renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice","id":"11400","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11400","key":"DPS-334","fields":{"statuscategorychangedate":"2025-11-07T10:46:28.823+0530","issuetype":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/issuetype/10034","id":"10034","description":"A small, distinct piece of work.","iconUrl":"https://hritwick05sas.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium","name":"Task","subtask":false,"avatarId":10318,"hierarchyLevel":0},"timespent":null,"customfield_10030":null,"project":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/project/10033","id":"10033","key":"DPS","name":"Demo Project SAS","projectTypeKey":"software","simplified":false,"avatarUrls":{"48x48":"https://hritwick05sas.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10425","24x24":"https://hritwick05sas.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10425?size=small","16x16":"https://hritwick05sas.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10425?size=xsmall","32x32":"https://hritwick05sas.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10425?size=medium"}},"customfield_10031":null,"customfield_10032":null,"fixVersions":[],"aggregatetimespent":null,"customfield_10034":null,"statusCategory":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/statuscategory/2","id":2,"key":"new","colorName":"blue-gray","name":"To Do"},"customfield_10035":null,"resolution":null,"customfield_10037":null,"customfield_10027":null,"customfield_10028":null,"customfield_10029":null,"resolutiondate":null,"workratio":-1,"watches":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/DPS-334/watchers","watchCount":1,"isWatching":true},"lastViewed":null,"created":"2025-11-07T10:46:28.611+0530","customfield_10020":null,"customfield_10021":null,"customfield_10022":null,"customfield_10023":null,"priority":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/priority/3","iconUrl":"https://hritwick05sas.atlassian.net/images/icons/priorities/medium_new.svg","name":"Medium","id":"3"},"customfield_10024":null,"customfield_10025":null,"labels":[],"customfield_10026":null,"customfield_10016":null,"customfield_10017":null,"customfield_10019":"0|i0029z:","timeestimate":null,"aggregatetimeoriginalestimate":null,"versions":[],"issuelinks":[{"id":"10153","self":"https://hritwick05sas.atlassian.net/rest/api/3/issueLink/10153","type":{"id":"10000","name":"Blocks","inward":"is blocked by","outward":"blocks","self":"https://hritwick05sas.atlassian.net/rest/api/3/issueLinkType/10000"},"outwardIssue":{"id":"11401","key":"DPS-335","self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11401","fields":{"summary":"Linked Issue B","status":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/status/10033","description":"","iconUrl":"https://hritwick05sas.atlassian.net/","name":"Backlog","id":"10033","statusCategory":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/statuscategory/2","id":2,"key":"new","colorName":"blue-gray","name":"To Do"}},"priority":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/priority/3","iconUrl":"https://hritwick05sas.atlassian.net/images/icons/priorities/medium_new.svg","name":"Medium","id":"3"},"issuetype":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/issuetype/10034","id":"10034","description":"A small, distinct piece of work.","iconUrl":"https://hritwick05sas.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium","name":"Task","subtask":false,"avatarId":10318,"hierarchyLevel":0}}}}],"assignee":null,"updated":"2025-11-07T10:46:30.036+0530","status":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/status/10033","description":"","iconUrl":"https://hritwick05sas.atlassian.net/","name":"Backlog","id":"10033","statusCategory":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/statuscategory/2","id":2,"key":"new","colorName":"blue-gray","name":"To Do"}},"components":[],"timeoriginalestimate":null,"description":null,"customfield_10010":null,"customfield_10014":null,"customfield_10015":null,"timetracking":{},"customfield_10005":null,"customfield_10006":null,"customfield_10007":null,"security":null,"customfield_10008":null,"attachment":[],"customfield_10009":null,"aggregatetimeestimate":null,"summary":"Linked Issue A","creator":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/user?accountId=60be4e88a17463007045760a","accountId":"60be4e88a17463007045760a","emailAddress":"hritwick.singh05@gmail.com","avatarUrls":{"48x48":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","24x24":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","16x16":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","32x32":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png"},"displayName":"Hritwick Singh","active":true,"timeZone":"Asia/Calcutta","accountType":"atlassian"},"subtasks":[],"reporter":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/user?accountId=60be4e88a17463007045760a","accountId":"60be4e88a17463007045760a","emailAddress":"hritwick.singh05@gmail.com","avatarUrls":{"48x48":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","24x24":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","16x16":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png","32x32":"https://secure.gravatar.com/avatar/b9c0717445d7ba1aba2f0bffd09b0a55?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHS-5.png"},"displayName":"Hritwick Singh","active":true,"timeZone":"Asia/Calcutta","accountType":"atlassian"},"aggregateprogress":{"progress":0,"total":0},"customfield_10001":null,"customfield_10002":[],"customfield_10003":null,"customfield_10004":null,"customfield_10038":null,"environment":null,"duedate":null,"progress":{"progress":0,"total":0},"votes":{"self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/DPS-334/votes","votes":0,"hasVoted":false},"comment":{"comments":[],"self":"https://hritwick05sas.atlassian.net/rest/api/3/issue/11400/comment","maxResults":0,"total":0,"startAt":0},"worklog":{"startAt":0,"maxResults":20,"total":0,"worklogs":[]}}} 
+ </msg>
+<msg time="2025-11-07T10:46:31.594712" level="INFO">C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework1\venv_stable\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hritwick05sas.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-11-07T10:46:31.595041" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<var>${get_response}</var>
+<arg>jira</arg>
+<arg>/rest/api/3/issue/${issue_key_a}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.087918" elapsed="0.507165"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.596529" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${get_response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.595503" elapsed="0.001124"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.597957" level="INFO">${issue_data} = {'expand': 'renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice', 'id': '11400', 'self': 'https://hritwick05sas.atlassian.net/rest/...</msg>
+<var>${issue_data}</var>
+<arg>${get_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.596997" elapsed="0.001018"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:31.598944" level="INFO">${issue_links} = [{'id': '10153', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issueLink/10153', 'type': {'id': '10000', 'name': 'Blocks', 'inward': 'is blocked by', 'outward': 'blocks', 'self': 'https://hr...</msg>
+<var>${issue_links}</var>
+<arg>${issue_data['fields']}</arg>
+<arg>issuelinks</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.598405" elapsed="0.000564"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.599417" level="INFO">Issue Links for DPS-334: [{'id': '10153', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issueLink/10153', 'type': {'id': '10000', 'name': 'Blocks', 'inward': 'is blocked by', 'outward': 'blocks', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issueLinkType/10000'}, 'outwardIssue': {'id': '11401', 'key': 'DPS-335', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11401', 'fields': {'summary': 'Linked Issue B', 'status': {'self': 'https://hritwick05sas.atlassian.net/rest/api/3/status/10033', 'description': '', 'iconUrl': 'https://hritwick05sas.atlassian.net/', 'name': 'Backlog', 'id': '10033', 'statusCategory': {'self': 'https://hritwick05sas.atlassian.net/rest/api/3/statuscategory/2', 'id': 2, 'key': 'new', 'colorName': 'blue-gray', 'name': 'To Do'}}, 'priority': {'self': 'https://hritwick05sas.atlassian.net/rest/api/3/priority/3', 'iconUrl': 'https://hritwick05sas.atlassian.net/images/icons/priorities/medium_new.svg', 'name': 'Medium', 'id': '3'}, 'issuetype': {'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issuetype/10034', 'id': '10034', 'description': 'A small, distinct piece of work.', 'iconUrl': 'https://hritwick05sas.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium', 'name': 'Task', 'subtask': False, 'avatarId': 10318, 'hierarchyLevel': 0}}}}]</msg>
+<arg>Issue Links for ${issue_key_a}: ${issue_links}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.599258" elapsed="0.000205"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.599742" level="INFO">${found} = False</msg>
+<var>${found}</var>
+<arg>False</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.599635" elapsed="0.000128"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:31.600735" level="INFO">${link_type_name} = Blocks</msg>
+<var>${link_type_name}</var>
+<arg>${link['type']}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.600246" elapsed="0.000512"/>
+</kw>
+<if>
+<branch type="IF" condition="'${link_type_name}' == 'Blocks' and 'outwardIssue' in ${link}">
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:31.601441" level="INFO">${outward_issue} = {'id': '11401', 'key': 'DPS-335', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issue/11401', 'fields': {'summary': 'Linked Issue B', 'status': {'self': 'https://hritwick05sas.atlassian.net/...</msg>
+<var>${outward_issue}</var>
+<arg>${link}</arg>
+<arg>outwardIssue</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.601282" elapsed="0.000184"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-07T10:46:31.601708" level="INFO">${outward_key} = DPS-335</msg>
+<var>${outward_key}</var>
+<arg>${outward_issue}</arg>
+<arg>key</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.601561" elapsed="0.000168"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.601915" level="INFO">Found outward link to: DPS-335</msg>
+<arg>Found outward link to: ${outward_key}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.601817" elapsed="0.000134"/>
+</kw>
+<if>
+<branch type="IF" condition="'${outward_key}' == '${issue_key_b}'">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-07T10:46:31.602296" level="INFO">${found} = True</msg>
+<var>${found}</var>
+<arg>True</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.602223" elapsed="0.000090"/>
+</kw>
+<status status="PASS" start="2025-11-07T10:46:31.602050" elapsed="0.000287"/>
+</branch>
+<status status="PASS" start="2025-11-07T10:46:31.602006" elapsed="0.000354"/>
+</if>
+<status status="PASS" start="2025-11-07T10:46:31.600851" elapsed="0.001527"/>
+</branch>
+<status status="PASS" start="2025-11-07T10:46:31.600824" elapsed="0.001568"/>
+</if>
+<var name="${link}">{'id': '10153', 'self': 'https://hritwick05sas.atlassian.net/rest/api/3/issueLink/10153', 'type': {'id': '10000', 'name': 'Blocks', 'inward': 'is blocked by', 'outward': 'blocks', 'self': 'https://hri...</var>
+<status status="PASS" start="2025-11-07T10:46:31.600172" elapsed="0.002235"/>
+</iter>
+<var>${link}</var>
+<value>@{issue_links}</value>
+<status status="PASS" start="2025-11-07T10:46:31.599906" elapsed="0.002523"/>
+</for>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${found}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-11-07T10:46:31.602852" elapsed="0.000254"/>
+</kw>
+<doc>Create two issues and link them using 'Blocks' relationship. Validate link via API.</doc>
+<status status="PASS" start="2025-11-07T10:46:27.725109" elapsed="3.878256"/>
+</test>
+<status status="PASS" start="2025-11-07T10:46:12.072714" elapsed="19.531617"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="test issues hybrid combined ref1 minimal2 5 25October" id="s1" pass="3" fail="0" skip="0">test issues hybrid combined ref1 minimal2 5 25October</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-11-07T10:46:12.442433" level="ERROR">Error in file 'C:\Users\hrsing\PycharmProjects\PythonProject\Jira_Hybrid_AutomationFramework2\automation_framework\tests\hybrid\test_issues_hybrid_combined_ref1_minimal2_5_25October.robot' on line 7: Invalid resource file extension '.py'. Supported extensions are '.json', '.resource', '.rest', '.robot', '.rsrc', '.rst', '.tsv' and '.txt'.</msg>
+</errors>
+</robot>

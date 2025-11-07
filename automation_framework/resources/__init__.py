@@ -1,0 +1,1 @@
+from automation_framework.resources.variables import BASE_URL, EMAIL, API_TOKEN
