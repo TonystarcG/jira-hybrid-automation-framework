@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]  # Trigger on main branch pushes
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Step 3: Login to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Step 4: Build Docker image
+      - name: Build Docker image
+        run: |
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest
+          docker build -t $IMAGE_URI .
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+
+      # Step 5: Push Docker image to ECR
+      - name: Push Docker image
+        run: |
+          docker push $IMAGE_URI
